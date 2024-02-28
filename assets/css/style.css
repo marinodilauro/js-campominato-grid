@@ -31,7 +31,7 @@ body {
 }
 
 .clicked {
-    background-color: var(--var-accent_darkest);
+    background-color: var(--var-accent_dark);
 }
 
 .mc_btn {
@@ -81,10 +81,8 @@ body {
 }
 
 .cell {
-    width: 75px;
     aspect-ratio: 1;
     border: 2px solid var(--var-font_dark);
-    line-height: 75px;
     text-align: center;
     font-size: 2rem;
 }
@@ -95,6 +93,21 @@ body {
 
 .cell:not(.clicked):hover {
     background-color: var(--var-accent_light);
+}
+
+.easy {
+    width: 75px;
+    line-height: 75px;
+}
+
+.medium {
+    width: 85px;
+    line-height: 85px;
+}
+
+.hard {
+    width: 100px;
+    line-height: 100px;
 }
 
 /* #endregion ||||| GAME ||||| */

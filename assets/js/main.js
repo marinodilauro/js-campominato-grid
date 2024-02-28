@@ -17,12 +17,15 @@ const gameContainerMarkup = `<div id="game_container" class="d-flex flex-wrap"><
 
 // Create a variable for the number of the cells to generate
 
-const cellsNumber = 100;
+let cellsNumber = 100;
+
+
+
 
 
 // Create a variable for the single grid element markup
 
-const cellMarkup = `<div class="cell"></div>`;
+let cellMarkup = `<div class="cell easy"></div>`;
 // console.log(cellMarkup);
 
 
@@ -39,11 +42,31 @@ playBtnElem.addEventListener("click", function () {
   if (isPlaying === false) {
 
     isPlaying = true;
+    console.log("Is playing: " + isPlaying);
 
     // Generate grid container
     headerElem.insertAdjacentHTML("afterend", gameContainerMarkup)
 
     const gameContainerElem = document.getElementById("game_container");
+
+    // Change cells number at different difficulty 
+
+    const inputDifficultyElem = document.getElementById("input_game_difficulty");
+    let gameDifficulty = inputDifficultyElem.value;
+
+    if (gameDifficulty === "medium") {
+      cellsNumber = 81;
+      cellMarkup = `<div class="cell medium"></div>`
+      gameContainerElem.style.width = "calc(85px * 9)"
+    } else if (gameDifficulty === "hard") {
+      cellsNumber = 49;
+      cellMarkup = `<div class="cell hard"></div>`
+      gameContainerElem.style.width = "calc(100px * 7)"
+    }
+
+    console.log(gameDifficulty);
+
+    console.log("Number of cells" + cellsNumber);
 
     // Generate cells
     for (let i = 0; i < cellsNumber; i++) {
@@ -53,7 +76,6 @@ playBtnElem.addEventListener("click", function () {
     };
   };
 
-  console.log("Is playing: " + isPlaying);
 
   const cellElems = document.getElementsByClassName("cell");
 
