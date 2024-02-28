@@ -16,7 +16,7 @@
     --var-font_light: rgb(249, 245, 240);
     --var-font_dark: rgb(117, 112, 104);
     --var-font_darkest: rgb(0, 0, 0);
-    --var-danger: rgb(2010, 0, 0);
+    --var-danger: rgb(200, 0, 0);
     --var-success: rgb(40, 170, 0);
 }
 
@@ -29,3 +29,13 @@
 
 
 /* #endregion ||||| COMMON RULES ||||| */
+
+
+/* #region ||||| HEADER ||||| */
+
+#site_header {
+    height: 80px;
+    background-color: var(--var-secondary);
+}
+
+/* #endregion ||||| HEADER ||||| */
