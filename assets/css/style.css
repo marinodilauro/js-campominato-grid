@@ -81,6 +81,8 @@ body {
 }
 
 .cell {
+    width: 75px;
+    line-height: 75px;
     aspect-ratio: 1;
     border: 2px solid var(--var-font_dark);
     text-align: center;
@@ -93,11 +95,6 @@ body {
 
 .cell:not(.clicked):hover {
     background-color: var(--var-accent_light);
-}
-
-.easy {
-    width: 75px;
-    line-height: 75px;
 }
 
 .medium {
