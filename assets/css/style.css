@@ -31,6 +31,7 @@
 
 body {
     background-color: var(--var-tertiary);
+    font-family: "Fredoka", sans-serif;
 }
 
 /* #endregion ||||| COMMON RULES ||||| */
@@ -59,6 +60,9 @@ body {
     width: 100px;
     aspect-ratio: 1;
     border: 2px solid var(--var-font_dark);
+    line-height: 100px;
+    text-align: center;
+    font-size: 3rem;
 }
 
 /* #endregion ||||| GAME ||||| */

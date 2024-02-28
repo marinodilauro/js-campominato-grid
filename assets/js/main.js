@@ -40,10 +40,12 @@ playBtnElem.addEventListener("click", function () {
 
     isPlaying = true;
 
+    // Generate grid container
     headerElem.insertAdjacentHTML("afterend", gameContainerMarkup)
 
     const gameContainerElem = document.getElementById("game_container");
 
+    // Generate cells
     for (let i = 0; i < cellsNumber; i++) {
 
       gameContainerElem.insertAdjacentHTML("afterbegin", cellMarkup)
@@ -53,22 +55,25 @@ playBtnElem.addEventListener("click", function () {
 
   console.log(isPlaying);
 
-});
-
-while (isPlaying) {
-
   const cellElems = document.getElementsByClassName("cell");
 
+  // Color cells on click
   for (let i = 0; i < cellElems.length; i++) {
+
     const cell = cellElems[i];
+
+    cell.innerHTML = i + 1;
 
     cell.addEventListener("click", function () {
 
-      console.log("click");
+      cell.classList.toggle("clicked");
+      console.log();
 
     });
   }
-}
+
+});
+
 
 
 // Create a variable for the single grid cell DOM element
