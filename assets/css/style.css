@@ -20,6 +20,9 @@
     --var-success: rgb(40, 170, 0);
 }
 
+.clicked {
+    background-color: var(--var-accent_darkest);
+}
 
 /* #endregion ||||| UTILITIES ||||| */
 

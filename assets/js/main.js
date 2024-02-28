@@ -25,6 +25,7 @@ const cellsNumber = 100;
 const cellMarkup = `<div class="cell"></div>`;
 console.log(cellMarkup);
 
+
 // Create a variable to prevent generation of multiple grids after the first
 
 let isPlaying = false;
@@ -50,4 +51,24 @@ playBtnElem.addEventListener("click", function () {
     };
   };
 
+  console.log(isPlaying);
+
 });
+
+while (isPlaying) {
+
+  const cellElems = document.getElementsByClassName("cell");
+
+  for (let i = 0; i < cellElems.length; i++) {
+    const cell = cellElems[i];
+
+    cell.addEventListener("click", function () {
+
+      console.log("click");
+
+    });
+  }
+}
+
+
+// Create a variable for the single grid cell DOM element
