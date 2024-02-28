@@ -1,1 +1,27 @@
+# Campo Minato
+L'utente clicca su un bottone che genererà una griglia di gioco quadrata. Ogni cella ha un numero progressivo, da 1 a 100. Ci saranno quindi 10 caselle per ognuna delle 10 righe.
+Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
 
+### Bonus:
+Aggiungere una select accanto al bottone di generazione, che fornisca una scelta tra tre diversi livelli di difficoltà:
+- con difficoltà 1 => 100 caselle, con un numero compreso tra 1 e 100, divise in 10 caselle per 10 righe;
+- con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
+- con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
+
+## Steps:
+- Creo una costante per l'elemento DOM del bottone "Play"
+- Creo una costante per l'elemento DOM che ospiterà la griglia
+- Creo una costante per il markup del singolo elemento della griglia
+- Genero tutti gli elementi della griglia
+- Inserisco all'interno di ogni elemento un numero casuale da 1 a 100 (senza farli ripetere)
+- Genero il container della griglia al click del bottone "Play"
+- Creo una costante per l'elemento DOM della cella della griglia
+- Al click della cella ne cambio il colore e faccio apparire in console il numero della cella cliccata tramite un event listener
+
+## Tools:
+- Variabili e costanti
+- document.getElementById()/document.queryselector()/document.queryselectorAll()
+- element.InsertAdjacentHTML()
+- for loop
+- if/else if/else
+- element.AddEventListener()
