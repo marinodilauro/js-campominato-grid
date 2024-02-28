@@ -90,7 +90,7 @@ function selectDifficulty(htmlInputID, htmlContainerID) {
  */
 function generateGrid(htmlContainerID, cssClass) {
 
-  const containerElem = document.getElementById(cssContainerID);
+  const containerElem = document.getElementById(htmlContainerID);
 
   const elementsList = document.getElementsByClassName(cssClass);
 
