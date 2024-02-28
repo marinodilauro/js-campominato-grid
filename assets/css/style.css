@@ -62,6 +62,10 @@ body {
 #site_header {
     height: 80px;
     background-color: var(--var-secondary);
+
+    #input_game_difficulty {
+        width: 17%;
+    }
 }
 
 /* #endregion ||||| HEADER ||||| */
