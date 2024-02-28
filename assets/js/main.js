@@ -1,18 +1,15 @@
 // Create a variable for the "Play" button DOM element
 
 const playBtnElem = document.getElementById("play_btn");
-// console.log(playBtnElem);
 
 // Create a variable for the header DOM element
 
 const headerElem = document.getElementById("site_header");
-// console.log(headerElem);
 
 
 // Create a variable for the grid DOM element
 
-const gameContainerMarkup = `<div id="game_container" class="d-flex flex-wrap"></div>`;
-// console.log(gameContainerMarkup);
+const containerMarkup = `<div id="game_container" class="d-flex flex-wrap"></div>`;
 
 
 // Create a variable for the number of the cells to generate
@@ -20,19 +17,14 @@ const gameContainerMarkup = `<div id="game_container" class="d-flex flex-wrap"><
 let cellsNumber = 100;
 
 
-
-
-
 // Create a variable for the single grid element markup
 
 let cellMarkup = `<div class="cell easy"></div>`;
-// console.log(cellMarkup);
 
 
 // Create a variable to prevent generation of multiple grids after the first
 
 let isPlaying = false;
-console.log("Is playing: " + isPlaying);
 
 
 // Generate the grid on click of "Play" button
@@ -42,60 +34,100 @@ playBtnElem.addEventListener("click", function () {
   if (isPlaying === false) {
 
     isPlaying = true;
-    console.log("Is playing: " + isPlaying);
 
     // Generate grid container
-    headerElem.insertAdjacentHTML("afterend", gameContainerMarkup)
-
-    const gameContainerElem = document.getElementById("game_container");
+    headerElem.insertAdjacentHTML("afterend", containerMarkup)
 
     // Change cells number at different difficulty 
+    selectDifficulty("input_game_difficulty", "game_container");
 
-    const inputDifficultyElem = document.getElementById("input_game_difficulty");
-    let gameDifficulty = inputDifficultyElem.value;
+    // Generate grid container
+    generateGrid("game_container", "cell");
 
-    if (gameDifficulty === "medium") {
-      cellsNumber = 81;
-      cellMarkup = `<div class="cell medium"></div>`
-      gameContainerElem.style.width = "calc(85px * 9)"
-    } else if (gameDifficulty === "hard") {
-      cellsNumber = 49;
-      cellMarkup = `<div class="cell hard"></div>`
-      gameContainerElem.style.width = "calc(100px * 7)"
-    }
-
-    console.log(gameDifficulty);
-
-    console.log("Number of cells" + cellsNumber);
-
-    // Generate cells
-    for (let i = 0; i < cellsNumber; i++) {
-
-      gameContainerElem.insertAdjacentHTML("afterbegin", cellMarkup)
-
-    };
   };
 
-
-  const cellElems = document.getElementsByClassName("cell");
-
-  // Color cells on click
-  for (let i = 0; i < cellElems.length; i++) {
-
-    const cell = cellElems[i];
-
-    cell.innerHTML = i + 1;
-
-    cell.addEventListener("click", function () {
-
-      cell.classList.toggle("clicked");
-      console.log(cell.innerHTML);
-
-    });
-  }
+  generateGridElems("cell");
 
 });
 
 
+// #region ||||| FUNCTIONS |||||
 
-// Create a variable for the single grid cell DOM element
+/**
+ * Set the container with the given ID dimension based on the option chosen in the input with the given ID
+ * 
+ * @param {string} htmlInputID HTML ID of the input to get data from
+ * @param {string} htmlContainerID HTML ID of the container to change the size of
+ * 
+ */
+function selectDifficulty(htmlInputID, htmlContainerID) {
+
+  const inputDifficultyElem = document.getElementById(htmlInputID);
+
+  let gameDifficulty = inputDifficultyElem.value;
+
+  const containerElem = document.getElementById(htmlContainerID);
+
+  if (gameDifficulty === "medium") {
+    cellsNumber = 81;
+    cellMarkup = `<div class="cell medium"></div>`
+    containerElem.style.width = "calc(85px * 9)"
+  } else if (gameDifficulty === "hard") {
+    cellsNumber = 49;
+    cellMarkup = `<div class="cell hard"></div>`
+    containerElem.style.width = "calc(100px * 7)"
+  }
+
+}
+
+
+/**
+ * Generate a grid of elements with the given class in the given container
+ * 
+ * @param {string} htmlContainerID HTML ID of the container in which to generate the grid
+ * @param {string} cssClass CSS Class to give to grid elements
+ * 
+ */
+function generateGrid(htmlContainerID, cssClass) {
+
+  const containerElem = document.getElementById(cssContainerID);
+
+  const elementsList = document.getElementsByClassName(cssClass);
+
+  for (let i = 0; i < cellsNumber; i++) {
+
+    containerElem.insertAdjacentHTML("afterbegin", cellMarkup)
+
+  };
+
+}
+
+
+/**
+ * Change cells color on click and add a consecutive number in it
+ * 
+ * @param {string} cssClass CSS class of the cell element to make clickable
+ * 
+ */
+function generateGridElems(cssClass) {
+
+  const elementsList = document.getElementsByClassName(cssClass);
+
+  // Color cells on click
+  for (let i = 0; i < elementsList.length; i++) {
+
+    const element = elementsList[i];
+
+    element.innerHTML = i + 1;
+
+    element.addEventListener("click", function () {
+
+      element.classList.toggle("clicked");
+      console.log(element.innerHTML);
+
+    });
+  }
+
+}
+
+// #endregion ||||| FUNCTIONS |||||
