@@ -1,0 +1,31 @@
+/* #region ||||| UTILITIES ||||| */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --var-primary: rgb(250, 248, 239);
+    --var-secondary: rgb(187, 173, 160);
+    --var-tertiary: rgb(238, 228, 218);
+    --var-accent_light: rgb(242, 177, 121);
+    --var-accent_dark: rgb(245, 149, 99);
+    --var-accent_darkest: rgb(246, 124, 95);
+    --var-font_light: rgb(249, 245, 240);
+    --var-font_dark: rgb(117, 112, 104);
+    --var-font_darkest: rgb(0, 0, 0);
+    --var-danger: rgb(2010, 0, 0);
+    --var-success: rgb(40, 170, 0);
+}
+
+
+/* #endregion ||||| UTILITIES ||||| */
+
+
+/* #region ||||| COMMON RULES ||||| */
+
+
+
+/* #endregion ||||| COMMON RULES ||||| */
