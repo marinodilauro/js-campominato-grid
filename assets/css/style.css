@@ -20,10 +20,6 @@
     --var-success: rgb(40, 170, 0);
 }
 
-.clicked {
-    background-color: var(--var-accent_darkest);
-}
-
 /* #endregion ||||| UTILITIES ||||| */
 
 
@@ -32,6 +28,10 @@
 body {
     background-color: var(--var-tertiary);
     font-family: "Fredoka", sans-serif;
+}
+
+.clicked {
+    background-color: var(--var-accent_darkest);
 }
 
 /* #endregion ||||| COMMON RULES ||||| */
@@ -63,6 +63,14 @@ body {
     line-height: 100px;
     text-align: center;
     font-size: 3rem;
+}
+
+.cell:hover {
+    cursor: pointer;
+}
+
+.cell:not(.clicked):hover {
+    background-color: var(--var-accent_light);
 }
 
 /* #endregion ||||| GAME ||||| */
