@@ -34,6 +34,26 @@ body {
     background-color: var(--var-accent_darkest);
 }
 
+.mc_btn {
+    background-color: var(--var-accent_dark);
+    border-color: var(--var-accent_dark);
+    font-size: 1.5rem;
+}
+
+.mc_btn:hover {
+    background-color: var(--var-accent_darkest);
+    border-color: var(--var-accent_darkest);
+}
+
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+    background-color: var(--var-accent_darkest);
+    border-color: var(--var-accent_darkest);
+}
+
 /* #endregion ||||| COMMON RULES ||||| */
 
 
