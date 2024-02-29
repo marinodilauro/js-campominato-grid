@@ -100,4 +100,17 @@ body {
     background-color: var(--var-accent_light);
 }
 
+.popup {
+    background-color: var(--var-primary);
+    color: var(--var-font_darkest);
+    padding: 2rem;
+    border: 3px solid var(--var-font_darkest);
+    font-size: 2rem;
+
+    h1 {
+        font-size: 4rem;
+    }
+
+}
+
 /* #endregion ||||| GAME ||||| */

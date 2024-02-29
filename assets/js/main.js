@@ -26,10 +26,13 @@ let cellMarkup = `<div class="cell"></div>`;
 // Create a variable to prevent generation of multiple grids after the first
 
 let isPlaying = false;
-console.log(isPlaying);
+console.log("Is playing: " + isPlaying);
 
 
+// Create a variable for game over
 
+let isGameOver = false;
+console.log("Game Over: " + isGameOver);
 
 
 // Create a variable for the maximum number of mushrooms to generate
@@ -41,6 +44,10 @@ const maxMushrooms = 16;
 let cellsNumber = document.getElementById("input_game_difficulty").value;
 
 
+// Create empty list for random numbers
+let rndNumbersList = [];
+
+
 // Generate the grid on click of "Play" button
 
 playBtnElem.addEventListener("click", function () {
@@ -48,16 +55,12 @@ playBtnElem.addEventListener("click", function () {
   if (isPlaying === false) {
 
     isPlaying = true;
-    console.log(isPlaying);
+    console.log("Is playing: " + isPlaying);
 
     // Read the difficulty level
     let cellsNumber = document.getElementById("input_game_difficulty").value;
 
-    // Create empty list for rnd numbers
-    const rndNumbersList = [];
-
     // Generate 16 random numbers from 1 to 16 
-
     while (rndNumbersList.length < maxMushrooms) {
 
       const randomNumber = randomNumberGenerator(1, cellsNumber);
@@ -67,8 +70,10 @@ playBtnElem.addEventListener("click", function () {
       }
 
     }
-
     console.log(rndNumbersList);
+
+    // Create varaible for the number of cells clicked
+    let clickedCells = "";
 
     // Generate grid container
     headerElem.insertAdjacentHTML("afterend", containerMarkup)
@@ -153,20 +158,29 @@ function addEventToElement(element) {
 
     console.log(this.innerText);
 
+    // clickedCells += 1;
+
+    // console.log(this.clickedCells);
+
     if (rndNumbersList.includes(Number(this.innerText))) {
 
-      element.classList.add("mushroom");
-      element.innerText = "🍄";
+      this.classList.add("mushroom");
+
+      this.innerText = "🍄";
+
+      gameOver();
+
+      console.log("Game Over: " + isGameOver);
 
     } else {
 
-      element.classList.add("clicked");
+      this.classList.add("clicked");
 
     }
 
   });
 
-}
+};
 
 /**
  * Remove the grid, remove the classes from the elements and let the player to restart game
@@ -186,7 +200,7 @@ function resetGame(htmlContainerID, cssClass) {
 
   cellsNumber = 100;
 
-}
+};
 
 
 /**
@@ -199,6 +213,63 @@ function resetGame(htmlContainerID, cssClass) {
  */
 function randomNumberGenerator(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
+
+
+//Game Over function
+function gameOver() {
+
+  const grid = document.getElementById("game_container");
+
+  isGameOver = true;
+
+  // Empty the random number list
+  rndNumbersList = [];
+
+  //Create game over popup
+  gameOverPopUp = popUp("div", "400px", "popup rounded", "GAME OVER");
+  grid.insertAdjacentElement("afterbegin", gameOverPopUp);
+
+};
+
+/**
+ * Generate an element on top of every other elements in the center of a container 
+ * 
+ * @param {string} htmlTag The HTML tag to generate
+ * @param {string} width The width of the element in pixels
+ * @param {Array} classes The class/classes to set on the element
+ * @param {string} title The title of the element
+ * @returns {element}
+ */
+function popUp(htmlTag, width, classes, title) {
+
+  const popUpElem = document.createElement(htmlTag);
+
+  popUpElem.classList = classes;
+
+  popUpElem.innerHTML = `
+  <h1>${title}</h1>
+  <p>You lose!</p>
+  <p>Better luck next time!</p>`;
+  // <p>Your score: ${clickedCells}</p>`;
+
+  popUpElem.style.width = `${width}`;
+
+  popUpElem.style.textAlign = "center";
+
+  popUpElem.style.margin = "0 auto";
+
+  popUpElem.style.position = "absolute";
+
+  popUpElem.style.top = "50%";
+
+  popUpElem.style.left = "50%";
+
+  popUpElem.style.transform = "translate(-50%, -50%)";
+
+  popUpElem.style.zIndex = "1000";
+
+  return popUpElem;
+};
 
 // #endregion ||||| FUNCTIONS |||||
