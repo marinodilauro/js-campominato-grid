@@ -34,7 +34,7 @@ Attenzione: nella stessa cella può essere posizionato al massimo un fungo, perc
 ### Steps:
 
 - Creo una lista vuota
-- Creo una funzione per generare un numero random tra 1 e il massimo numero di celle definito dalla difficoltà scelta
+- Creo una funzione per generare 16 numeri random tra 1 e il massimo numero di celle definito dalla difficoltà scelta
 - Verifico se il numero è già presente nella lista
   - SE non è presente:
     - Inserisco il numero nella lista

@@ -18,11 +18,6 @@ const headerElem = document.getElementById("site_header");
 const containerMarkup = `<div id="game_container" class="d-flex flex-wrap"></div>`;
 
 
-// Create a variable for the number of the cells to generate
-
-// let cellsNumber = 100;
-
-
 // Create a variable for the single grid element markup
 
 let cellMarkup = `<div class="cell"></div>`;
@@ -36,7 +31,7 @@ console.log(isPlaying);
 
 // Create empty list for rnd numbers
 
-let rndNumbersList = [];
+const rndNumbersList = [];
 
 
 // Create a variable for the maximum number of mushrooms to generate
@@ -44,10 +39,25 @@ let rndNumbersList = [];
 const maxMushrooms = 16;
 
 
+// Read the difficulty level
+let cellsNumber = document.getElementById("input_game_difficulty").value;
+
+
 // Generate 16 random numbers from 1 to 16 
 
-randomNumberGenerator(1, maxMushrooms);
+while (rndNumbersList.length < maxMushrooms) {
 
+  console.log(maxMushrooms);
+
+  const randomNumber = randomNumberGenerator(1, cellsNumber);
+  console.log(randomNumber);
+
+  if (!rndNumbersList.includes(randomNumber)) {
+    rndNumbersList.push(randomNumber);
+  }
+}
+
+console.log(rndNumbersList);
 
 // Generate the grid on click of "Play" button
 
@@ -136,6 +146,7 @@ function generateGridElems(htmlTag, size, cssClass, numb) {
  * The event listener add the CSS class"clicked" to the element and print the element inner text in console.
  * 
  * @param {element} element The element to add the event listener to
+ * 
  */
 function addEventToElement(element) {
 
@@ -175,6 +186,7 @@ function resetGame(htmlContainerID, cssClass) {
  * 
  * @param {number} min Minimum of the range
  * @param {number} max Maximum of the range
+ * 
  * @returns {number}
  */
 function randomNumberGenerator(min, max) {
