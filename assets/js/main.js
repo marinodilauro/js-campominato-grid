@@ -2,9 +2,11 @@
 
 const playBtnElem = document.getElementById("play_btn");
 
+
 // Create a variable for the "Reset" button DOM element
 
 const resetBtnElem = document.getElementById("reset_btn");
+
 
 // Create a variable for the header DOM element
 
@@ -18,7 +20,7 @@ const containerMarkup = `<div id="game_container" class="d-flex flex-wrap"></div
 
 // Create a variable for the number of the cells to generate
 
-let cellsNumber = 100;
+// let cellsNumber = 100;
 
 
 // Create a variable for the single grid element markup
@@ -31,6 +33,22 @@ let cellMarkup = `<div class="cell"></div>`;
 let isPlaying = false;
 console.log(isPlaying);
 
+
+// Create empty list for rnd numbers
+
+let rndNumbersList = [];
+
+
+// Create a variable for the maximum number of mushrooms to generate
+
+const maxMushrooms = 16;
+
+
+// Generate 16 random numbers from 1 to 16 
+
+randomNumberGenerator(1, maxMushrooms);
+
+
 // Generate the grid on click of "Play" button
 
 playBtnElem.addEventListener("click", function () {
@@ -39,20 +57,20 @@ playBtnElem.addEventListener("click", function () {
 
     isPlaying = true;
     console.log(isPlaying);
+
+    // Read the difficulty level
+    let cellsNumber = document.getElementById("input_game_difficulty").value;
+
     // Generate grid container
     headerElem.insertAdjacentHTML("afterend", containerMarkup)
 
-    // Change cells number at different difficulty 
-    selectDifficulty("input_game_difficulty", "game_container");
-
-    // Generate grid container
-    generateGrid("game_container", "cell");
+    // Generate grid with cells
+    generateGrid("game_container", cellsNumber);
 
   };
 
-  generateGridElems("cell");
-
 });
+
 
 // Remove grid and let the player to restart the game on click of "Reset" button
 
@@ -62,51 +80,23 @@ resetBtnElem.addEventListener("click", resetGame);
 // #region ||||| FUNCTIONS |||||
 
 /**
- * Set the container with the given ID dimension based on the option chosen in the input with the given ID
- * 
- * @param {string} htmlInputID HTML id of the input to get data from
- * @param {string} htmlContainerID HTML id of the container to change the size of
- * 
- */
-function selectDifficulty(htmlInputID, htmlContainerID) {
-
-  const inputDifficultyElem = document.getElementById(htmlInputID);
-
-  let gameDifficulty = inputDifficultyElem.value;
-
-  const containerElem = document.getElementById(htmlContainerID);
-
-  if (gameDifficulty === "easy") {
-    cellMarkup = `<div class="cell"></div>`;
-  } else if (gameDifficulty === "medium") {
-    cellsNumber = 81;
-    cellMarkup = `<div class="cell medium"></div>`
-    containerElem.style.width = "calc(85px * 9)"
-  } else if (gameDifficulty === "hard") {
-    cellsNumber = 49;
-    cellMarkup = `<div class="cell hard"></div>`
-    containerElem.style.width = "calc(100px * 7)"
-  }
-
-}
-
-
-/**
- * Generate a grid of elements with the given class in the given container
+ * Generate a grid of elements with the given class in the given container.
  * 
  * @param {string} htmlContainerID HTML id of the container in which to generate the grid
- * @param {string} cssClass CSS class to give to grid elements
+ * @param {number} difficultyLevel Level of difficulty (the number of cells to generate)
  * 
  */
-function generateGrid(htmlContainerID, cssClass) {
+function generateGrid(htmlContainerID, difficultyLevel) {
 
-  const containerElem = document.getElementById(htmlContainerID);
+  const grid = document.getElementById(htmlContainerID);
 
-  const elementsList = document.getElementsByClassName(cssClass);
+  for (let i = 1; i <= difficultyLevel; i++) {
 
-  for (let i = 0; i < cellsNumber; i++) {
+    const gridElement = generateGridElems("div", difficultyLevel, "cell", i);
 
-    containerElem.insertAdjacentHTML("afterbegin", cellMarkup)
+    grid.insertAdjacentElement("beforeend", gridElement);
+
+    addEventToElement(gridElement);
 
   };
 
@@ -114,32 +104,50 @@ function generateGrid(htmlContainerID, cssClass) {
 
 
 /**
- * Change cells color on click and add a consecutive number in it
+ * Generate a give HTML tag with size of 10% of the container.
+ * Add a given CSS class to the tag.
+ * Insert a progressive number at the center of the element from 1 to the give size (both included)
  * 
+ * @param {string} htmlTag The HTML tag to generate
+ * @param {number} size The size of the grid (to generate elements with a width of 10% of the container)
  * @param {string} cssClass CSS class of the cell element to make clickable
+ * @param {number} numb The number of elements to generate
  * 
+ * @returns {element}
  */
-function generateGridElems(cssClass) {
+function generateGridElems(htmlTag, size, cssClass, numb) {
 
-  const elementsList = document.getElementsByClassName(cssClass);
+  const gridElement = document.createElement(htmlTag);
 
-  // Color cells on click
-  for (let i = 0; i < elementsList.length; i++) {
+  gridElement.classList.add(cssClass);
 
-    const element = elementsList[i];
+  gridElement.innerText = numb;
 
-    element.innerHTML = i + 1;
+  gridElement.style.width = `calc(100% / ${Math.sqrt(size)})`;
 
-    element.addEventListener("click", function () {
+  gridElement.style.lineHeight = `calc(750px / ${Math.sqrt(size)})`;
 
-      element.classList.toggle("clicked");
-      console.log(element.innerHTML);
-
-    });
-  }
+  return gridElement;
 
 }
 
+/**
+ * Add an event listener to the given element.
+ * The event listener add the CSS class"clicked" to the element and print the element inner text in console.
+ * 
+ * @param {element} element The element to add the event listener to
+ */
+function addEventToElement(element) {
+
+  element.addEventListener("click", function (e) {
+
+    element.classList.toggle("clicked");
+
+    console.log(this.innerText);
+
+  });
+
+}
 
 /**
  * Remove the grid, remove the classes from the elements and let the player to restart game
@@ -159,6 +167,18 @@ function resetGame(htmlContainerID, cssClass) {
 
   cellsNumber = 100;
 
+}
+
+
+/**
+ * Generate a random number between a minimum and a maximum (both included).
+ * 
+ * @param {number} min Minimum of the range
+ * @param {number} max Maximum of the range
+ * @returns {number}
+ */
+function randomNumberGenerator(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 // #endregion ||||| FUNCTIONS |||||
