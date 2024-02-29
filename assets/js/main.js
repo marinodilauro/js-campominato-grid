@@ -63,36 +63,18 @@ let cellsClicked = 0;
 
 playBtnElem.addEventListener("click", function () {
 
-  if (isPlaying === false) {
+  if (isPlaying) {
 
-    isPlaying = true;
-    console.log("Is playing: " + isPlaying);
+    const containerElem = document.getElementById("game_container");
 
-    // Read the difficulty level
-    let cellsNumber = document.getElementById("input_game_difficulty").value;
+    containerElem.remove();
 
-    // Generate 16 random numbers from 1 to 16 
-    while (rndNumbersList.length < maxMushrooms) {
+    playGame();
 
-      const randomNumber = randomNumberGenerator(1, cellsNumber);
+  } else {
 
-      if (!rndNumbersList.includes(randomNumber)) {
-        rndNumbersList.push(randomNumber);
-      }
-
-    }
-    console.log(rndNumbersList);
-
-    // Create varaible for the number of cells clicked
-    let clickedCells = "";
-
-    // Generate grid container
-    headerElem.insertAdjacentHTML("afterend", containerMarkup)
-
-    // Generate grid with cells
-    generateGrid("game_container", cellsNumber);
-
-  };
+    playGame();
+  }
 
 });
 
@@ -103,7 +85,43 @@ resetBtnElem.addEventListener("click", resetGame);
 
 
 
+
 // #region ||||| FUNCTIONS |||||
+
+function playGame() {
+
+  isPlaying = true;
+  console.log("Is playing: " + isPlaying);
+
+  isGameOver = false;
+  console.log("Is game over: " + isGameOver);
+
+  // Read the difficulty level
+  let cellsNumber = document.getElementById("input_game_difficulty").value;
+
+  // Generate 16 random numbers from 1 to 16 
+  while (rndNumbersList.length < maxMushrooms) {
+
+    const randomNumber = randomNumberGenerator(1, cellsNumber);
+
+    if (!rndNumbersList.includes(randomNumber)) {
+      rndNumbersList.push(randomNumber);
+    }
+
+  }
+  console.log(rndNumbersList);
+
+  // Create varaible for the number of cells clicked
+  let clickedCells = "";
+
+  // Generate grid container
+  headerElem.insertAdjacentHTML("afterend", containerMarkup)
+
+  // Generate grid with cells
+  generateGrid("game_container", cellsNumber);
+
+
+}
 
 /**
  * Generate a grid of elements with the given class in the given container.
@@ -191,6 +209,8 @@ function removeEventFromElement(element) {
  */
 function clickCell() {
 
+  const grid = document.getElementById("game_container");
+
   console.log(this.innerText);
 
   cellsClicked += 1;
@@ -207,6 +227,10 @@ function clickCell() {
 
     console.log("Game Over: " + isGameOver);
 
+  } else if (cellsClicked === (cellsNumber - rndNumbersList.length)) {
+
+    winnerPopUp = popUp("div", "500px", "popup rounded", "YOU WIN!", "Congratulations!", "Wanna try again?");
+    grid.insertAdjacentElement("afterbegin", winnerPopUp);
   } else {
 
     this.classList.add("clicked");
@@ -217,23 +241,18 @@ function clickCell() {
 
 
 /**
- * Remove the grid, remove the classes from the elements and let the player to restart game
+ * Remove the grid, remove the classes from the elements and let the player restart game
  */
-function resetGame(htmlContainerID, cssClass) {
+function restartGame(htmlContainerID, cssClass) {
 
-  if (isPlaying === true) {
+  if (isGameOver) {
 
     const containerElem = document.getElementById("game_container");
 
     containerElem.remove();
 
-    isPlaying = false;
-    console.log(isPlaying);
-
+    playGame();
   }
-
-  cellsNumber = 100;
-
 };
 
 
@@ -257,12 +276,19 @@ function gameOver() {
 
   //Create game over popup
   const grid = document.getElementById("game_container");
-
-  gameOverPopUp = popUp("div", "400px", "popup rounded", "GAME OVER");
+  gameOverPopUp = popUp("div", "500px", "popup rounded", "GAME OVER", "Better luck next time!", "Wanna try again?");
   grid.insertAdjacentElement("afterbegin", gameOverPopUp);
+
+  // Create a variable for the "Restart game" button DOM element
+  const restartBtnElem = document.getElementById("restart_btn");
+  restartBtnElem.addEventListener("click", restartGame);
 
   //Set game over to true
   isGameOver = true;
+
+  //Set isPlaying to false
+  isPlaying = false;
+  console.log("Is playing: " + isPlaying);
 
   // Empty the random number list
   rndNumbersList = [];
@@ -289,9 +315,11 @@ function gameOver() {
  * @param {string} width The width of the element in pixels
  * @param {Array} classes The class/classes to set on the element
  * @param {string} title The title of the element
+ * @param {string} [line1] First optional phrase
+ * @param {string} [line2] Second optional phrase
  * @returns {element}
  */
-function popUp(htmlTag, width, classes, title) {
+function popUp(htmlTag, width, classes, title, line1, line2) {
 
   const popUpElem = document.createElement(htmlTag);
 
@@ -299,9 +327,10 @@ function popUp(htmlTag, width, classes, title) {
 
   popUpElem.innerHTML = `
   <h1>${title}</h1>
-  <p>You lose!</p>
-  <p>Better luck next time!</p>`;
-  // <p>Your score: ${clickedCells}</p>`;
+  <p>${line1}</p>
+  <p>${line2}</p>
+  <p>Your score: ${cellsClicked}</p>
+  <button type="button" class="btn btn-primary mc_btn px-5 py-2" id="restart_btn">Reset</button>`;
 
   popUpElem.style.width = `${width}`;
 
