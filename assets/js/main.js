@@ -47,14 +47,12 @@ let cellsNumber = document.getElementById("input_game_difficulty").value;
 
 while (rndNumbersList.length < maxMushrooms) {
 
-  console.log(maxMushrooms);
-
   const randomNumber = randomNumberGenerator(1, cellsNumber);
-  console.log(randomNumber);
 
   if (!rndNumbersList.includes(randomNumber)) {
     rndNumbersList.push(randomNumber);
   }
+
 }
 
 console.log(rndNumbersList);
@@ -152,9 +150,18 @@ function addEventToElement(element) {
 
   element.addEventListener("click", function (e) {
 
-    element.classList.toggle("clicked");
-
     console.log(this.innerText);
+
+    if (rndNumbersList.includes(Number(this.innerText))) {
+
+      element.classList.add("mushroom");
+      element.innerText = "🍄";
+
+    } else {
+
+      element.classList.add("clicked");
+
+    }
 
   });
 

@@ -34,6 +34,10 @@ body {
     background-color: var(--var-accent_dark);
 }
 
+.mushroom {
+    background-color: var(--var-danger);
+}
+
 .mc_btn {
     background-color: var(--var-accent_dark);
     border-color: var(--var-accent_dark);
@@ -92,7 +96,7 @@ body {
     cursor: pointer;
 }
 
-.cell:not(.clicked):hover {
+.cell:not(.clicked):not(.mushroom):hover {
     background-color: var(--var-accent_light);
 }
 
