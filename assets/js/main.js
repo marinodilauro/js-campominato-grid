@@ -1,3 +1,6 @@
+// #region ||||| VARIABLES |||||
+
+
 // Create a variable for the "Play" button DOM element
 
 const playBtnElem = document.getElementById("play_btn");
@@ -48,6 +51,14 @@ let cellsNumber = document.getElementById("input_game_difficulty").value;
 let rndNumbersList = [];
 
 
+// Create varaible for the number of cells clicked
+let cellsClicked = 0;
+
+
+// #endregion ||||| VARIABLES |||||
+
+
+
 // Generate the grid on click of "Play" button
 
 playBtnElem.addEventListener("click", function () {
@@ -89,6 +100,7 @@ playBtnElem.addEventListener("click", function () {
 // Remove grid and let the player to restart the game on click of "Reset" button
 
 resetBtnElem.addEventListener("click", resetGame);
+
 
 
 // #region ||||| FUNCTIONS |||||
@@ -145,42 +157,64 @@ function generateGridElems(htmlTag, size, cssClass, numb) {
 
 }
 
+
 /**
  * Add an event listener to the given element.
- * The event listener add the CSS class"clicked" to the element and print the element inner text in console.
  * 
  * @param {element} element The element to add the event listener to
  * 
  */
 function addEventToElement(element) {
 
-  element.addEventListener("click", function (e) {
-
-    console.log(this.innerText);
-
-    // clickedCells += 1;
-
-    // console.log(this.clickedCells);
-
-    if (rndNumbersList.includes(Number(this.innerText))) {
-
-      this.classList.add("mushroom");
-
-      this.innerText = "🍄";
-
-      gameOver();
-
-      console.log("Game Over: " + isGameOver);
-
-    } else {
-
-      this.classList.add("clicked");
-
-    }
-
-  });
+  element.addEventListener("click", clickCell);
 
 };
+
+
+/**
+ * Remove an event listener from the given element.
+ * 
+ * @param {element} element The element to add the event listener to
+ * 
+ */
+function removeEventFromElement(element) {
+
+  element.removeEventListener("click", clickCell);
+
+};
+
+
+/**
+ * Manage the click of the cells.
+ * If there is a mushroom in a cell the game is over
+ * 
+ */
+function clickCell() {
+
+  console.log(this.innerText);
+
+  cellsClicked += 1;
+
+  console.log(cellsClicked);
+
+  if (rndNumbersList.includes(Number(this.innerText))) {
+
+    this.classList.add("mushroom");
+
+    this.innerText = "🍄";
+
+    gameOver();
+
+    console.log("Game Over: " + isGameOver);
+
+  } else {
+
+    this.classList.add("clicked");
+
+  }
+
+}
+
 
 /**
  * Remove the grid, remove the classes from the elements and let the player to restart game
@@ -216,21 +250,37 @@ function randomNumberGenerator(min, max) {
 };
 
 
-//Game Over function
+/**
+ * Manage game over and prevent the user to play after game over
+ */
 function gameOver() {
 
+  //Create game over popup
   const grid = document.getElementById("game_container");
 
+  gameOverPopUp = popUp("div", "400px", "popup rounded", "GAME OVER");
+  grid.insertAdjacentElement("afterbegin", gameOverPopUp);
+
+  //Set game over to true
   isGameOver = true;
 
   // Empty the random number list
   rndNumbersList = [];
 
-  //Create game over popup
-  gameOverPopUp = popUp("div", "400px", "popup rounded", "GAME OVER");
-  grid.insertAdjacentElement("afterbegin", gameOverPopUp);
+  // Reset the number of cells clicked
+  cellsClicked = 0;
+
+  // Prevent the user to click cells after game over
+  const cellList = document.querySelectorAll(".cell");
+
+  for (let i = 0; i < cellList.length; i++) {
+    const element = cellList[i];
+
+    removeEventFromElement(element);
+  }
 
 };
+
 
 /**
  * Generate an element on top of every other elements in the center of a container 
