@@ -29,9 +29,7 @@ let isPlaying = false;
 console.log(isPlaying);
 
 
-// Create empty list for rnd numbers
 
-const rndNumbersList = [];
 
 
 // Create a variable for the maximum number of mushrooms to generate
@@ -42,20 +40,6 @@ const maxMushrooms = 16;
 // Read the difficulty level
 let cellsNumber = document.getElementById("input_game_difficulty").value;
 
-
-// Generate 16 random numbers from 1 to 16 
-
-while (rndNumbersList.length < maxMushrooms) {
-
-  const randomNumber = randomNumberGenerator(1, cellsNumber);
-
-  if (!rndNumbersList.includes(randomNumber)) {
-    rndNumbersList.push(randomNumber);
-  }
-
-}
-
-console.log(rndNumbersList);
 
 // Generate the grid on click of "Play" button
 
@@ -68,6 +52,23 @@ playBtnElem.addEventListener("click", function () {
 
     // Read the difficulty level
     let cellsNumber = document.getElementById("input_game_difficulty").value;
+
+    // Create empty list for rnd numbers
+    const rndNumbersList = [];
+
+    // Generate 16 random numbers from 1 to 16 
+
+    while (rndNumbersList.length < maxMushrooms) {
+
+      const randomNumber = randomNumberGenerator(1, cellsNumber);
+
+      if (!rndNumbersList.includes(randomNumber)) {
+        rndNumbersList.push(randomNumber);
+      }
+
+    }
+
+    console.log(rndNumbersList);
 
     // Generate grid container
     headerElem.insertAdjacentHTML("afterend", containerMarkup)
