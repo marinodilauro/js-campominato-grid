@@ -328,8 +328,8 @@ function popUp(htmlTag, width, classes, title, line1, line2) {
   popUpElem.innerHTML = `
   <h1>${title}</h1>
   <p>${line1}</p>
-  <p>${line2}</p>
   <p>Your score: ${cellsClicked}</p>
+  <p>${line2}</p>
   <button type="button" class="btn btn-primary mc_btn px-5 py-2" id="restart_btn">Reset</button>`;
 
   popUpElem.style.width = `${width}`;
