@@ -210,7 +210,7 @@ function clickCell() {
 
   if (rndNumbersList.includes(Number(this.innerText))) {
 
-    this.classList.add("mushroom");
+    this.classList.add("koffing");
 
     this.innerText = "";
 
@@ -224,6 +224,7 @@ function clickCell() {
 
     winnerPopUp = popUp("div", "500px", "popup rounded", "YOU WIN!", "Congratulations!", "Wanna try again?");
     grid.insertAdjacentElement("afterbegin", winnerPopUp);
+
   } else {
 
     cellsClicked += 1;
