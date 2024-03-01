@@ -208,10 +208,6 @@ function clickCell() {
 
   console.log(this.innerText);
 
-  cellsClicked += 1;
-
-  console.log(cellsClicked);
-
   if (rndNumbersList.includes(Number(this.innerText))) {
 
     this.classList.add("mushroom");
@@ -229,6 +225,10 @@ function clickCell() {
     winnerPopUp = popUp("div", "500px", "popup rounded", "YOU WIN!", "Congratulations!", "Wanna try again?");
     grid.insertAdjacentElement("afterbegin", winnerPopUp);
   } else {
+
+    cellsClicked += 1;
+
+    console.log(cellsClicked);
 
     this.classList.add("clicked");
 
