@@ -233,6 +233,8 @@ function clickCell() {
 
     this.classList.add("clicked");
 
+    removeEventFromElement(this);
+
   }
 
 }
@@ -284,7 +286,7 @@ function gameOver() {
 
       console.log("show koffing");
 
-      element.classList.add("mushroom");
+      element.classList.add("koffing");
 
       element.innerText = "";
 
