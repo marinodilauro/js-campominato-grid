@@ -79,13 +79,6 @@ playBtnElem.addEventListener("click", function () {
 });
 
 
-// Remove grid and let the player to restart the game on click of "Reset" button
-
-resetBtnElem.addEventListener("click", resetGame);
-
-
-
-
 // #region ||||| FUNCTIONS |||||
 
 function playGame() {
@@ -133,6 +126,8 @@ function playGame() {
 function generateGrid(htmlContainerID, difficultyLevel) {
 
   const grid = document.getElementById(htmlContainerID);
+
+  grid.classList.add("rounded");
 
   for (let i = 1; i <= difficultyLevel; i++) {
 
@@ -221,7 +216,9 @@ function clickCell() {
 
     this.classList.add("mushroom");
 
-    this.innerText = "🍄";
+    this.innerText = "";
+
+    this.style.backgroundImage = "url('../assets/img/Koffingbig.webp')";
 
     gameOver();
 
@@ -274,7 +271,28 @@ function randomNumberGenerator(min, max) {
  */
 function gameOver() {
 
-  //Create game over popup
+  // Prevent the user to click cells after game over
+  const cellList = document.querySelectorAll(".cell");
+
+  for (let i = 0; i < cellList.length; i++) {
+
+    const element = cellList[i];
+
+    // Shows all koffings 
+    if (rndNumbersList.includes(Number(element.innerText))) {
+
+      console.log("show koffing");
+
+      element.classList.add("mushroom");
+
+      element.innerText = "";
+
+      element.style.backgroundImage = "url('../assets/img/Koffingbig.webp')";
+    }
+    removeEventFromElement(element);
+  }
+
+  // Create game over popup
   const grid = document.getElementById("game_container");
   gameOverPopUp = popUp("div", "500px", "popup rounded", "GAME OVER", "Better luck next time!", "Wanna try again?");
   grid.insertAdjacentElement("afterbegin", gameOverPopUp);
@@ -296,14 +314,6 @@ function gameOver() {
   // Reset the number of cells clicked
   cellsClicked = 0;
 
-  // Prevent the user to click cells after game over
-  const cellList = document.querySelectorAll(".cell");
-
-  for (let i = 0; i < cellList.length; i++) {
-    const element = cellList[i];
-
-    removeEventFromElement(element);
-  }
 
 };
 

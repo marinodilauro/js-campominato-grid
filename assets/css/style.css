@@ -7,12 +7,12 @@
 }
 
 :root {
-    --var-primary: rgb(250, 248, 239);
-    --var-secondary: rgb(187, 173, 160);
+    --var-primary: rgb(87, 77, 196);
+    --var-secondary: rgb(195, 145, 255);
     --var-tertiary: rgb(238, 228, 218);
-    --var-accent_light: rgb(242, 177, 121);
-    --var-accent_dark: rgb(245, 149, 99);
-    --var-accent_darkest: rgb(246, 124, 95);
+    --var-accent_light: rgb(175, 121, 242);
+    --var-accent_dark: rgb(180, 99, 245);
+    --var-accent_darkest: rgb(140, 95, 246);
     --var-font_light: rgb(249, 245, 240);
     --var-font_dark: rgb(117, 112, 104);
     --var-font_darkest: rgb(0, 0, 0);
@@ -26,27 +26,28 @@
 /* #region ||||| COMMON RULES ||||| */
 
 body {
-    background-color: var(--var-tertiary);
+    background-color: var(--var-primary);
+    color: var(--var-font_darkest);
     font-family: "Fredoka", sans-serif;
 }
 
 .clicked {
-    background-color: var(--var-accent_dark);
+    background-color: var(--var-secondary);
 }
 
 .mushroom {
-    background-color: var(--var-danger);
+    background-color: var(--var-accent_dark);
 }
 
 .mc_btn {
-    background-color: var(--var-accent_dark);
-    border-color: var(--var-accent_dark);
+    background-color: var(--var-accent_darkest);
+    border: 2px solid var(--var-tertiary);
     font-size: 1.5rem;
 }
 
 .mc_btn:hover {
-    background-color: var(--var-accent_darkest);
-    border-color: var(--var-accent_darkest);
+    background-color: var(--var-accent_dark);
+    border-color: var(--var-accent_dark);
 }
 
 .btn-check:checked+.btn,
@@ -66,6 +67,18 @@ body {
 #site_header {
     height: 80px;
     background-color: var(--var-secondary);
+    background-image: url(../img/gengar3.png);
+    color: var(--var-tertiary);
+
+    h1 {
+        font-size: 3rem;
+        text-shadow: 0px 0px 20px black;
+    }
+
+    label {
+        font-size: 1.5rem;
+        text-shadow: 0px 0px 20px black;
+    }
 
     #input_game_difficulty {
         width: 17%;
@@ -81,15 +94,17 @@ body {
     width: 750px;
     margin: 1rem auto;
     box-sizing: content-box;
-    border: 2px solid var(--var-font_dark);
+    border: 2px solid var(--var-tertiary);
 }
 
 .cell {
-
     aspect-ratio: 1;
-    border: 2px solid var(--var-font_dark);
+    border: 2px solid var(--var-tertiary);
     text-align: center;
     font-size: 2rem;
+    background-position-x: -1px;
+    background-position-y: 4px;
+    background-size: cover;
 }
 
 .cell:hover {
@@ -101,7 +116,7 @@ body {
 }
 
 .popup {
-    background-color: var(--var-primary);
+    background-color: var(--var-secondary);
     color: var(--var-font_darkest);
     padding: 2.5rem;
     border: 10px solid var(--var-font_dark);
