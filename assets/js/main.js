@@ -214,7 +214,7 @@ function clickCell() {
 
     this.innerText = "";
 
-    this.style.backgroundImage = "url('../assets/img/koffingbig.webp')";
+    this.style.backgroundImage = "url('./assets/img/Koffingbig.webp')";
 
     gameOver();
 
@@ -290,7 +290,7 @@ function gameOver() {
 
       element.innerText = "";
 
-      element.style.backgroundImage = "url('../assets/img/Koffingbig.webp')";
+      element.style.backgroundImage = "url('./assets/img/Koffingbig.webp')";
     }
     removeEventFromElement(element);
   }
