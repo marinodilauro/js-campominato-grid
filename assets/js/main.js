@@ -214,7 +214,7 @@ function clickCell() {
 
     this.innerText = "";
 
-    this.style.backgroundImage = "url('../assets/img/Koffingbig.webp')";
+    this.style.backgroundImage = "url('../assets/img/koffingbig.webp')";
 
     gameOver();
 
