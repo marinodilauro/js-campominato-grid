@@ -12,6 +12,8 @@
     --var-tertiary: rgb(238, 228, 218);
     --var-accent_light: rgb(175, 121, 242);
     --var-accent_dark: rgb(180, 99, 245);
+    --var-koffing_bg: rgb(169, 152, 171);
+    --var-popup_bg: rgb(195, 145, 255,0.85);
     --var-accent_darkest: rgb(140, 95, 246);
     --var-font_light: rgb(249, 245, 240);
     --var-font_dark: rgb(117, 112, 104);
@@ -26,6 +28,7 @@
 /* #region ||||| COMMON RULES ||||| */
 
 body {
+    overflow-y: hidden;
     background-color: var(--var-primary);
     color: var(--var-font_darkest);
     font-family: "Fredoka", sans-serif;
@@ -36,7 +39,7 @@ body {
 }
 
 .koffing {
-    background-color: var(--var-accent_dark);
+    background-color: var(--var-koffing_bg);
 }
 
 .mc_btn {
@@ -65,9 +68,9 @@ body {
 /* #region ||||| HEADER ||||| */
 
 #site_header {
-    height: 80px;
-    background-color: var(--var-secondary);
-    background-image: url(../img/gengar3.png);
+    height: 100px;
+    background-image: url(../img/Koffing_bg.jpeg);
+    background-position: 95% 61%;
     color: var(--var-tertiary);
 
     h1 {
@@ -92,6 +95,7 @@ body {
 
 #game_container {
     width: 750px;
+    height: calc(100% - 100px);
     margin: 1rem auto;
     box-sizing: content-box;
     border: 2px solid var(--var-tertiary);
@@ -116,7 +120,8 @@ body {
 }
 
 .popup {
-    background-color: var(--var-secondary);
+    background-color: var(--var-popup_bg);
+    back
     color: var(--var-font_darkest);
     padding: 2.5rem;
     border: 10px solid var(--var-font_dark);
